@@ -87,7 +87,6 @@ public class TestCaseUtil implements RestBase {
 					testCaseResultMap.put(entry.getKey(), map);
                     
                     String error = testCaseWithStatus.getError();
-                    logger.printf("error for %s = %s...%n",testCaseWithStatus.getTestCaseName(),testCaseWithStatus.getError());
                     
 				} else {
 					String testCase = testCaseWithStatus.getTestCase();
@@ -687,11 +686,10 @@ else {
 					
 //				executeTests(zephyrData, executionId, value.get(issueKey));
 					
-					String error = value.get(issueKey);
-                    logger.printf("error = %s%n", error);
+					String error = value.get(issueKey);                   
 					Long executionId = issueKeyExecutionIdMap.get(issueKey);
                     
-					if (error.isEmpty()) {
+					if (error.isEmpty()) {                        
 						passList.add(executionId );
 					} else {
 						failMap.put(executionId,error);
