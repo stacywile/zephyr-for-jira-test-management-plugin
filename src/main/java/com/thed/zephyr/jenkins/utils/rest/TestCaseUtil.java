@@ -484,7 +484,7 @@ else {
         CloseableHttpResponse response = null;
         JSONObject commentObj = new JSONObject();
         if (logFilePath != null){
-            comment = comment + "log: "+logFilePath;
+            comment = "log: " + logFilePath + comment;
         }
         commentObj.put("comment",comment);
         
@@ -533,7 +533,7 @@ else {
                 while (it.hasNext()) {
                     Map.Entry pair = (Map.Entry)it.next();
                     //logger.printf("id/error pair = %d,%s%n",pair.getKey(),pair.getValue());
-                    String comment = pair.getValue().toString()+"\n";
+                    String comment = "\nFailure Reason: " + pair.getValue().toString();
                     addExecutionComment(pair.getKey().toString(),comment,zephyrData,logFilePath);
                 }
 			}
