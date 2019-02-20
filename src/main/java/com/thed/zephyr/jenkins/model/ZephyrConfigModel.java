@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.thed.zephyr.jenkins.utils.rest.RestClient;
 
+import hudson.FilePath;
+
 public class ZephyrConfigModel {
 
 	private List<TestCaseResultModel> testcases;
@@ -19,8 +21,17 @@ public class ZephyrConfigModel {
 	private boolean zfjClud;
 	private String cycleIdZfjCloud;
 	private int builNumber;
+	private FilePath workspace;
 
 
+	public FilePath getWorkspace() {
+		return workspace;
+	}
+	
+	public void setWorkspace(FilePath workspace) {
+		this.workspace = workspace;
+	}
+	
 	public long getTestIssueTypeId() {
 		return testIssueTypeId;
 	}

@@ -31,6 +31,7 @@ import com.thed.zephyr.jenkins.model.ZephyrConfigModel;
 
 import java.io.PrintStream;
 import hudson.model.BuildListener;
+import hudson.FilePath;
 
 public class TestCaseUtil implements RestBase {
 	
@@ -141,7 +142,6 @@ public class TestCaseUtil implements RestBase {
 		String createURL = URL_CREATE_TESTS.replace("{SERVER}", zephyrData.getRestClient().getUrl());
 		HttpPost httpPost = new HttpPost(createURL);
 		httpPost.addHeader("Content-Type", "application/json");
-		
 		CloseableHttpResponse issueCreateResponse = null;
 		try {
 			StringEntity se = new StringEntity(bulkIssues.toString());
@@ -161,6 +161,13 @@ public class TestCaseUtil implements RestBase {
 		if (issueCreateResponse != null)
 			try {
 				issueCreateResponse.close();
+                FilePath fp = null;
+                fp = zephyrData.getWorkspace();
+                try{
+                    fp.child("new_tests.json").write(bulkIssues.toString(),null);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }               
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

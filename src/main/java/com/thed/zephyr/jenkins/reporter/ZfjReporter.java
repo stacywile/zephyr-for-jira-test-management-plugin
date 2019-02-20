@@ -32,6 +32,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 
+import com.thed.zephyr.jenkins.model.TestCaseModel;
 import com.thed.zephyr.jenkins.model.TestCaseResultModel;
 import com.thed.zephyr.jenkins.model.ZephyrCloudInstance;
 import com.thed.zephyr.jenkins.model.ZephyrConfigModel;
@@ -150,11 +151,13 @@ public class ZfjReporter extends Notifier {
 			ZephyrConfigModel zephyrConfig) {
 		
 		boolean status = true;
+		zephyrConfig.setWorkspace(build.getWorkspace());
 		Map<String, Boolean> zephyrTestCaseMap = new HashMap<String, Boolean>();
 		Map<String, String> zephyrTestCaseErrorMap = new HashMap<String, String>();
 		TestResultAction testResultAction = build.getAction(TestResultAction.class);
 		logger.printf("in prepareZephyrTests%n");
-
+		//logger.printf("build action = %s%n",testResultAction.toString());
+		//logger.printf("build action result = %s%n",testResultAction.getResult().getTestResult().getChildren().toString());
 		Collection<SuiteResult> suites = null;
 		
 		try {
